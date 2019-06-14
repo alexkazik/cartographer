@@ -1,0 +1,94 @@
+<html><head><style>
+.card {
+  background-position: -160px 0px;
+  background-size: 320px 160px;
+}
+.modal-dialog {
+    max-width: 95%;
+}
+
+.modal-dialog .modal-content {
+    border-radius: 2px;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-dialog .modal-content .modal-body img {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 14px;
+}
+
+.modal-dialog .modal-content .modal-header {
+    border: none;
+}
+
+.modal-dialog .modal-content .modal-header .btn {
+    margin: 0 5px 0 0;
+}
+
+.modal-dialog .modal-content .modal-header .close {
+    text-shadow: none;
+    color: #FFF;
+    opacity: 1;
+}
+
+.btn {
+    border-radius: 0;
+}
+</style><link rel="stylesheet" href="bootstrap.min.css"></head><body>
+<h1><a href="https://github.com/alexkazik/cartographer">7th Continent Cartographer</a></h1>
+<h2>This a demo on how the program works</h2>
+<p>Usually A1 and A2 (or any name you choose) would show different area of the continent
+    but to keep the demo simple both are almost identical.
+</p>
+<hr>
+Areas: <a href="a1.html">A1</a> <a href="a2.html">A2</a> <table border="0" cellspacing="0" cellpadding="0" style="background: url(a2.jpeg); background-size: 640px 480px"><tr><td><img src=map.jpeg width=160><td><img src=map.jpeg width=160><td><img src=fog.jpeg width=160><td><img src=map.jpeg width=160><tr><td><img src=fog.jpeg width=160><td><a href="javascript:card('1000')"><img id=1000 src=empty.png width=160></a><td><a href="javascript:card('1001')"><img id=1001 src=multiple.png width=160></a><td><a href="javascript:card('1002')"><img id=1002 src=empty.png width=160></a><tr><td><img src=map.jpeg width=160><td><img src=fog.jpeg width=160><td><a href="javascript:card('1003')"><img id=1003 src=empty.png width=160></a><td><img src=map.jpeg width=160></table>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div id="modalNav">
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id=modalImage src=empty.png>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="jquery-3.3.1.slim.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script>function card(id) {
+    var sub = cards[id];
+    cardShow(id, cardActive[id]);
+    $('#exampleModalCenter').modal({});
+    var out = '';
+    for (var i = 0; i < sub.length; i++) {
+        var e = sub[i];
+        if (!e[0]) {
+            btn = 'btn-success';
+        } else {
+            btn = 'btn-warning';
+        }
+        out += '<a href="javascript:cardShow(\'' + id + '\', \'' + e[2] + '\')" class="btn ' + btn + '">' + e[1] + ' <small>(' + e[2] + ')</small></a>';
+    }
+    $('#modalNav').html(out);
+}
+
+function cardShow(id, img) {
+    cardActive[id] = img;
+    $('#modalImage')
+        .attr('src', 'card/' + img + '.jpeg');
+    $('#' + id)
+        .css('background-image', 'url(\'card/' + img + '.jpeg\')')
+        .addClass('card');
+}
+var cardActive = {"1000":"A0324","1001":"A0326","1002":"A0320","1003":"A0319"};var cards = {"1000":[[false,"009","A0324"]],"1001":[[false,"010","A0325"],[true,"010","A0326"]],"1002":[[false,"005","A0320"]],"1003":[[false,"004","A0319"]]};</script>
